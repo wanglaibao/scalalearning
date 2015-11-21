@@ -1,2 +1,2 @@
 # scalalearning
-该项目菜鸟我用来学习scala语言的
+该项目是菜鸟我用来记录scala语言学习方面的东东
