@@ -69,10 +69,114 @@
   null
   
   三：伴生类和伴生对象
+  在Scala中存在另外一种单例对象，与类同名并且和类位于同一个文件中，这样的单例对象叫做伴生对象，类叫做伴生类。
+  在Scala中，伴生类和伴生对象之间没有明显的界限，他们之间可以相互访问彼此的private字段和private方法，在有伴生对象的
+  情况下，我们可以将伴生类的主构造函数定义为私有的，这样就可以屏蔽外界对伴生类的实例化了。
+  我们可以用伴生类和伴生对象来改写上面的单例对象。
   
+  class Apple private(val color: String) {
+    	println("Creating " + this)
+    
+    	override def toString(): String = {
+    		"the color is " + color
+    	}
+  }
+
+  object Apple {
+  	private var applesCache = Map(
+  								"red"  		-> new Apple("red"),
+  								"green"		-> new Apple("green"),
+  								"yellow"	-> new Apple("yellow"),
+  								"orange"	-> new Apple("orange"),
+  								"blue"		-> new Apple("blue"),
+  								"indigo"	-> new Apple("indigo"),
+  								"purple"	-> new Apple("purple")	
+  							)
+  							
+  	
+  	def getAppleByColor(color: String): Apple = {
+  		if(applesCache.contains(color))
+  			applesCache(color)
+  		else
+  			null
+  	}
+  	
+  } 
   
   四：如何实现Java中的static方法和static字段
+  我们知道相对于Java来说，Scala是一门更纯的面向对象的语言【pure object language】,在Scala语言中没有static filed or static method。
+  但是Scala可以通过类的伴生对象来完成Java的static field or static method的功能。
+  在Scala中，伴生对象里面的方法就是相当于Java语言类的static方法，参看下面的例子，来了解Scala是如何实现static的功能的。
   
+  class Apple private(val color: String) {
+  	println("Creating " + this)
+  
+  	override def toString(): String = {
+  		"the color is " + color
+  	}
+  }
+
+  object Apple {
+  	
+  	private var applesCache = Map(
+  								"red"  		-> new Apple("red"),
+  								"green"		-> new Apple("green"),
+  								"yellow"	-> new Apple("yellow"),
+  								"orange"	-> new Apple("orange"),
+  								"blue"		-> new Apple("blue"),
+  								"indigo"	-> new Apple("indigo"),
+  								"purple"	-> new Apple("purple")	
+  							)
+  							
+  	
+  	def getPrimaryColors() : String = {
+  		"red, green, yellow, orange, blue, indigo, purple"
+  	}
+  	
+  	def apply(color: String): Apple = {
+  		if(applesCache.contains(color))
+  			applesCache(color)
+  		else
+  			null
+  	}
+  	
+  } 
+  
+  println(Apple("red"))
+  println(Apple("green"))
+  println(Apple("yellow"))
+  println(Apple("orange"))
+  println(Apple("blue"))
+  println(Apple("indigo"))
+  println(Apple("purple"))
+  println(Apple("other color"))
+  println()
+  println("primary colors are "+ Apple.getPrimaryColors())
+  
+  运行上面的代码，结果参看如下：
+  
+  E:\program_scala_learning\chapter5>scala Apple.scala
+    Creating the color is red
+    Creating the color is green
+    Creating the color is yellow
+    Creating the color is orange
+    Creating the color is blue
+    Creating the color is indigo
+    Creating the color is purple
+    the color is red
+    the color is green
+    the color is yellow
+    the color is orange
+    the color is blue
+    the color is indigo
+    the color is purple
+    null
+    
+    primary colors are red, green, yellow, orange, blue, indigo, purple
+  
+    我们在伴生对象中定义了方法getPrimaryColors，这个方法就类似于Java中的static方法；伴生对象还有一个好处就是利用伴生对象来创建实例的
+    时候没有必要使用new关键词了，我们可以通过apply()方法来完成对象实例的创建，这个特性是Scala语言提供的一个语法糖。该语法糖能够让对象
+    实例的创建更容易。
   
   五：Scala类之间的继承关系
   
