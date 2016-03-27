@@ -179,6 +179,65 @@
   对Double类型来说，默认值是0.0,对Boolean类型来说，默认值是false,对引用类型来说，其默认值为null;
   
   但是在Scala中，只能用"_"来初始化var类型的变量，无法初始化val类型的变量，因为val类型的变量无法修改的。
+  
+
+五：迎合JavaBean风格的getXXX,setXXX
+   到目前为止我们看到Scala类中的getXXX,setXXX方法，跟我们比较熟悉的JavaBean风格的有很大差异；
+   我们可以通过 Scala.beans.Property 注解实现具有JavaBean风格的getXXX,setXXX, 请看下面的例子：
+   
+   	import scala.beans.BeanProperty
+
+	class Human(@BeanProperty var firstName: String,
+	             @BeanProperty var lastName: String) {
+				 
+		@BeanProperty
+		var age: Int = _
+		
+		@BeanProperty
+		var position: String = _
+		
+		
+		override def toString(): String = {
+			firstName+" "+lastName+" "+age+" old and hold "+position+" position"
+		}
+	}
+	
+	
+	接下来我们看看反编译之后的结果吧：
+	
+	E:\program_scala_learning\chapter4>scalac Human.scala
+
+	E:\program_scala_learning\chapter4>javap -p Human
+	Compiled from "Human.scala"
+	public class Human {
+	  private java.lang.String firstName;
+	  private java.lang.String lastName;
+	  private int age;
+	  private java.lang.String position;
+	  public java.lang.String firstName();
+	  public void firstName_$eq(java.lang.String);
+	  public void setFirstName(java.lang.String);
+	  public java.lang.String lastName();
+	  public void lastName_$eq(java.lang.String);
+	  public void setLastName(java.lang.String);
+	  public int age();
+	  public void age_$eq(int);
+	  public void setAge(int);
+	  public java.lang.String position();
+	  public void position_$eq(java.lang.String);
+	  public void setPosition(java.lang.String);
+	  public java.lang.String toString();
+	  public java.lang.String getFirstName();
+	  public java.lang.String getLastName();
+	  public int getAge();
+	  public java.lang.String getPosition();
+	  public Human(java.lang.String, java.lang.String);
+	}
+	   
+   
+  	从上面的结果中，我们看到了只要给Scala的字段添加@scala.beans.Property注解，我们就可以实现按照Java风格的getXXX和setXXX了，
+  	
+  	这样可以方便我们在Java代码中使用Scala的代码。
  
         
      
