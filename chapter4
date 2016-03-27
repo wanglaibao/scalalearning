@@ -40,7 +40,15 @@
 	public void setAddress(String address) {
 		this.address = address;
 	}
-}
+    }
+    
+    Student.scala
+    
+    class Student(var name: String, var age: Int, var address: String)
+    
+    从上面的Student.java 和 Student.scala 对比中，我们可以看出Scala大大降低了代码量，通常一个同样功能由Scala来实现的话，其代码量
+    
+    一般为Java实现代码量的一半以下。因此Scala还是值得我们这些Java屌丝学习的。
 
 
 
