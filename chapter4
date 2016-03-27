@@ -75,17 +75,39 @@
      
      1： Scala将会把这个类变成public的，在Scala中，任何没有标记为private,protected的数据默认都是public的；
      
-     2： 主构造函数中var定义的变量，会在类中定义成private的字段，并且有对应的getXXX,setXXX方法，【例如Student.scala中name字段的
+     2： 主构造函数中var定义的变量，会在类中定义成private的字段，并且有对应的public getXXX,setXXX方法，【例如Student.scala中name字段的
           定义】
           	  private java.lang.String name;
 	          public java.lang.String name();
 	          public void name_$eq(java.lang.String);
 	          
-     3： 主构造函数中val定义的变量，会在类中定义成private的字段，并且有对应的getXXX方法，【例如Student.scala中name字段的
+     3： 主构造函数中val定义的变量，会在类中定义成private final的字段，并且有对应的public getXXX方法，【例如Teacher.scala中name字段的
           定义】
-          	  private java.lang.String name;
-	          public java.lang.String name();
-	          public void name_$eq(java.lang.String);
+          	 class Teacher(val name: String, val age: Int, val address: String)
+          	 
+          	  E:\program_scala_learning\chapter4>javap -private Teacher
+		  Compiled from "Teacher.scala"
+		  public class Teacher {
+		   private final java.lang.String name;
+		   public java.lang.String name();
+		   public Teacher(java.lang.String, int, java.lang.String);
+		  }
+		  
+     4: 主构造函数中如果参数既没有被val修饰也没有被var修饰的话，Scala就会创建一个private类型的字段以及private的getXXX,setXXX,
+        这样外界就无法访问了。
+        
+     5: 位于类中定义的任何表达式或者可执行语句都是主构造函数定义的一部分执行。例如下面的例子
+     
+     	class Sample{
+		println("I am creating an instance of Sample class")
+	}
+
+	new Sample
+
+	E:\program_scala_learning\chapter4>scala Sample.scala
+	I am creating an instance of Sample class
+        
+        
      
      
      
