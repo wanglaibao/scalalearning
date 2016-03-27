@@ -108,6 +108,78 @@
 	I am creating an instance of Sample class
         
  四：副构造函数和类中定义变量
+ 除了在主构造函数里面定义变量以外，我们还可以在类里面定义其他字段和定义方法，还可以定义一个或者多个副构造函数【this() or this(param1, param2,param3)】。
+ 参考下面的Person.scala类
+ 
+	 class Person(val firstName: String, val lastName: String) {
+		var age: Int = _
+		
+		var position: String = _
+		
+		def this(firstName: String, lastName: String, age: Int) {
+			this(firstName, lastName)
+			this.age = age
+		}
+	
+		override def toString(): String = {
+			firstName + " " + lastName + " is " + age + " old , and hold " + position +" position"  
+		}
+	
+	}
+	
+我们对他进行编译和反编译看看内部的本质吧
+
+	E:\program_scala_learning\chapter4>javap -private Person
+	Compiled from "Person.scala"
+	public class Person {
+	  private final java.lang.String firstName;
+	  private final java.lang.String lastName;
+	  private int age;
+	  private java.lang.String position;
+	  public java.lang.String firstName();
+	  public java.lang.String lastName();
+	  public int age();
+	  public void age_$eq(int);
+	  public java.lang.String position();
+	  public void position_$eq(java.lang.String);
+	  public java.lang.String toString();
+	  public Person(java.lang.String, java.lang.String);
+	  public Person(java.lang.String, java.lang.String, int);
+	}
+ 
+ 我们可以看到在类里面定义的var age, var position变量，会被自动加上private修饰符，并且提供了对应的public getXXX, setXXX
+ 
+  	  private int age;
+	  public int age();
+	  public void age_$eq(int);
+ 可以看出，这个跟在主构造函数里面进行定义是一致的。一旦我们给age和position加上private修饰符如下所示：
+ 	  private var age: Int = _
+		
+	  private var position: String = _
+ 此时，我们进行反编译，看看如何
+ 	public class Person {
+	  private final java.lang.String firstName;
+	  private final java.lang.String lastName;
+	  private int age;
+	  private java.lang.String position;
+	  public java.lang.String firstName();
+	  public java.lang.String lastName();
+	  private int age();
+	  private void age_$eq(int);
+	  private java.lang.String position();
+	  private void position_$eq(java.lang.String);
+	  public java.lang.String toString();
+	  public Person(java.lang.String, java.lang.String);
+	  public Person(java.lang.String, java.lang.String, int);
+	}
+  此时，age, position字段的getXXX,setXXX都变成了private了，外界就无法访问了。
+  
+  另外对副构造函数来说，我们要特别注意：副构造函数内的第一条语句必须调用主构造函数或者其他副构造函数，二者必须其一；
+  还有一点要注意：我们在类里面用下划线“_”来定义age,position变量，这个“_”表示他们的默认值，对Int类型来说，默认值是0,
+  对Double类型来说，默认值是0.0,对Boolean类型来说，默认值是false,对引用类型来说，其默认值为null;
+  
+  但是在Scala中，只能用"_"来初始化var类型的变量，无法初始化val类型的变量，因为val类型的变量无法修改的。
+ 
         
      
      
