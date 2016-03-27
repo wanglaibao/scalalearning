@@ -49,6 +49,47 @@
     从上面的Student.java 和 Student.scala 对比中，我们可以看出Scala大大降低了代码量，通常一个同样功能由Scala来实现的话，其代码量
     
     一般为Java实现代码量的一半以下。因此Scala还是值得我们这些Java屌丝学习的。
+    
+ 
+ 三：Scala类的定义
+     从上面的Student.scala的定义中，我们可以看出Scala定义一个类是很简单的事情，Scala将主构造函数【Primary Constructor】放在类的定义，
+     让我们定义字段和对应的getXXX,setXXX方法变得很简单。类定义看上去很简单，但是背后隐含了很多信息，下面我们通过编译和反编译看看背后的
+     秘密。
+     
+     	E:\program_scala_learning\chapter4>scalac Student.scala
+
+	E:\program_scala_learning\chapter4>javap -private Student
+	Compiled from "Student.scala"
+	public class Student {
+	  private java.lang.String name;
+	  private int age;
+	  private java.lang.String address;
+	  public java.lang.String name();
+	  public void name_$eq(java.lang.String);
+	  public int age();
+	  public void age_$eq(int);
+	  public java.lang.String address();
+	  public void address_$eq(java.lang.String);
+	  public Student(java.lang.String, int, java.lang.String);
+	}
+     
+     1： Scala将会把这个类变成public的，在Scala中，任何没有标记为private,protected的数据默认都是public的；
+     
+     2： 主构造函数中var定义的变量，会在类中定义成private的字段，并且有对应的getXXX,setXXX方法，【例如Student.scala中name字段的
+          定义】
+          	  private java.lang.String name;
+	          public java.lang.String name();
+	          public void name_$eq(java.lang.String);
+	          
+     3： 主构造函数中val定义的变量，会在类中定义成private的字段，并且有对应的getXXX方法，【例如Student.scala中name字段的
+          定义】
+          	  private java.lang.String name;
+	          public java.lang.String name();
+	          public void name_$eq(java.lang.String);
+     
+     
+     
+     
 
 
 
