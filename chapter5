@@ -1,1 +1,79 @@
+                                                      第五章  Scala类的初阶
+  一：序言
+  本章主要介绍Scala中的单例对象,伴生类和伴生对象的有关知识以及Scala中类继承的基础知识。
+  
+  二：单例对象
+  单例指的是一个类在系统中有且只有一个实例对象，单例对象可以实现对象工厂之类的操作；
+  Scala中创建单例对象十分简单，只需采用object关键词来定义一个类就可以了，无需使用class关键词。
+  由于单例对象是无法初始化的，因此不可以给单例对象的主构造函数传替参数。
+  
+  首先我们定义一个Apple类
+    
+      class Apple(val color: String) {
+      	println("Creating " + this)
+      
+      	override def toString(): String = {
+      		"the color is " + color
+      	}
+      }
+      
+  接着我们实现一个单例对象AppleMaker来生产不同颜色的Apple
+  
+  object AppleMaker {
+  	private val applesCache = Map(
+  									"red" 		-> new Apple("red"),
+  									"green" 	-> new Apple("green"),
+  									"yellow"	-> new Apple("yellow"),
+  									"orange"	-> new Apple("orange"),
+  									"blue"		-> new apple("blue"),
+  									"indigo"	-> new Apple("indigo"),
+  									"purple"	-> new Apple("purple")
+  								)
+  												
+  	def getAppleByColor(color: String): Apple = {
+  		if(applesCache.contains(color)) 
+  			applesCache()
+  		else 
+  			null
+  	}
+  }
 
+
+  println(AppleMaker 	getAppleByColor "red")
+  println(AppleMaker	getAppleByColor "green")
+  println(AppleMaker	getAppleByColor "yellow")
+  println(AppleMaker	getAppleByColor "orange")
+  println(AppleMaker	getAppleByColor "blue")
+  println(AppleMaker	getAppleByColor "indigo")
+  println(AppleMaker	getAppleByColor "purple")
+  println(AppleMaker	getAppleByColor "other color")
+
+  编译并且运行上面的例子就可以得到如下的结果:
+  E:\program_scala_learning\chapter5>scalac Apple.scala
+  
+  E:\program_scala_learning\chapter5>scala AppleMaker.scala
+  Creating the color is red
+  Creating the color is green
+  Creating the color is yellow
+  Creating the color is orange
+  Creating the color is blue
+  Creating the color is indigo
+  Creating the color is purple
+  the color is red
+  the color is green
+  the color is yellow
+  the color is orange
+  the color is blue
+  the color is indigo
+  the color is purple
+  null
+  
+  三：伴生类和伴生对象
+  
+  
+  四：如何实现Java中的static方法和static字段
+  
+  
+  五：Scala类之间的继承关系
+  
+                                                      
