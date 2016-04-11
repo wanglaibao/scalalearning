@@ -50,6 +50,8 @@
     
     一般为Java实现代码量的一半以下。因此Scala还是值得我们这些Java屌丝学习的。
     
+    在上面的Student.scala的定义中，我们可以猜想到Scala能够将构造函数中的参数定义成类中的字段，并且生成对应的getXXX 和 setXXX方法。
+    
  
  三：Scala类的定义
      从上面的Student.scala的定义中，我们可以看出Scala定义一个类是很简单的事情，Scala将主构造函数【Primary Constructor】放在类的定义，
