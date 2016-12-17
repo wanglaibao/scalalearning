@@ -1,6 +1,5 @@
 
 获取token
-
 #### 1. 获取token
 * url: /api/xxxxx/{uid}
 * 方法：GET
@@ -8,6 +7,7 @@
 * uid:用户的信息
 * 返回值:
 ```
+
 {
     code: 0,
     error: "",     
