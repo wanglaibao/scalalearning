@@ -1,7 +1,7 @@
 
-获取挖财token
+获取token
 
-#### 1. 获取挖财的token
+#### 1. 获取token
 * url: /api/xxxxx/{uid}
 * 方法：GET
 * 参数：
