@@ -2,10 +2,10 @@
 获取挖财token
 
 #### 1. 获取挖财的token
-* url: /api/waCaiToken/{wjfUserId}
+* url: /api/xxxxx/{uid}
 * 方法：GET
 * 参数：
-* wjfUserId:用户的wjfUserId
+* uid:用户的信息
 * 返回值:
 ```
 {
