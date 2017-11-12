@@ -1,4 +1,4 @@
-package com.laibao.demo
+package com.laibao.chapter03
 
 object HelloWorld {
   def main(args: Array[String]): Unit = {
