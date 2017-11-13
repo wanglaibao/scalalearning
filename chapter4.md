@@ -1,9 +1,9 @@
-                                                          第四章 Scala类的基础知识
-  一：序言                                                        
+#                                                          第四章 Scala类的基础知识
+##  一：序言
     本章的学习主要比较Java和Scala在创建类方面的差异，首先从一个简单的Java类开始，接着将该Java类转换成Scala类，看看Scala是如何简化类的创建的。
     接下来学习Scala创业类方面的知识点。
   
-  二：创建类
+##  二：创建类
   Student.java
   
   public class Student {
@@ -53,7 +53,7 @@
     在上面的Student.scala的定义中，我们可以猜想到Scala能够将构造函数中的参数定义成类中的字段，并且生成对应的getXXX 和 setXXX方法。
     
  
- 三：Scala类的定义
+## 三：Scala类的定义
      从上面的Student.scala的定义中，我们可以看出Scala定义一个类是很简单的事情，Scala将主构造函数【Primary Constructor】放在类的定义，
      让我们定义字段和对应的getXXX,setXXX方法变得很简单。类定义看上去很简单，但是背后隐含了很多信息，下面我们通过编译和反编译看看背后的
      秘密。
@@ -109,7 +109,7 @@
 	E:\program_scala_learning\chapter4>scala Sample.scala
 	I am creating an instance of Sample class
         
- 四：副构造函数和类中定义变量
+## 四：副构造函数和类中定义变量
  除了在主构造函数里面定义变量以外，我们还可以在类里面定义其他字段和定义方法，还可以定义一个或者多个副构造函数【this() or this(param1, param2,param3)】。
  参考下面的Person.scala类
  
@@ -182,8 +182,7 @@
   
   但是在Scala中，只能用"_"来初始化var类型的变量，无法初始化val类型的变量，因为val类型的变量无法修改的。
   
-
-五：迎合JavaBean风格的getXXX,setXXX
+## 五：迎合JavaBean风格的getXXX,setXXX
    到目前为止我们看到Scala类中的getXXX,setXXX方法，跟我们比较熟悉的JavaBean风格的有很大差异；
    我们可以通过 Scala.beans.Property 注解实现具有JavaBean风格的getXXX,setXXX, 请看下面的例子：
    
