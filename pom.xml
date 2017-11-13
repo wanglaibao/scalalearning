@@ -10,11 +10,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <java_source_version>1.8</java_source_version>
-        <java_target_version>1.8</java_target_version>
         <scala.version>2.11.6</scala.version>
-        <guava.version>19.0</guava.version>
-        <kotlin.version>1.1.2-2</kotlin.version>
     </properties>
 
     <dependencies>
@@ -63,11 +59,4 @@
             </plugin>
         </plugins>
     </build>
-
-   
-
-
-
-  
-      
 </project>
