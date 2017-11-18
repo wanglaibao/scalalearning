@@ -16,5 +16,18 @@ object HelloWorld {
     println()
     println(scalaCar.milesDriven())
 
+
+    new Sample
+
+    val people = new People("wang","laibao","Programmer")
+    println(people.getFirstName)
+    println(people.getLastName)
+    println(people.getPosition)
+
+
+    val people1 = new People("mao","zedong")
+    println(people1.getFirstName)
+    println(people1.getLastName)
+    println(people1.getPosition)
   }
 }
