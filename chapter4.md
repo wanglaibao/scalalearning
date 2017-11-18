@@ -7,6 +7,8 @@
   Student.java
   
   public class Student {
+  
+  
 	private String name;
 	private int age;
 	private String address;
@@ -58,7 +60,11 @@
      让我们定义字段和对应的getXXX,setXXX方法变得很简单。类定义看上去很简单，但是背后隐含了很多信息，下面我们通过编译和反编译看看背后的
      秘密。
      
+     
+     
      	E:\program_scala_learning\chapter4>scalac Student.scala
+
+
 
 	E:\program_scala_learning\chapter4>javap -private Student
 	Compiled from "Student.scala"
@@ -75,17 +81,23 @@
 	  public Student(java.lang.String, int, java.lang.String);
 	}
      
+     
+     
      1： Scala将会把这个类变成public的，在Scala中，任何没有标记为private,protected的数据默认都是public的；
+     
      
      2： 主构造函数中var定义的变量，会在类中定义成private的字段，并且有对应的public getXXX,setXXX方法，【例如Student.scala中name字段的
           定义】
           	  private java.lang.String name;
 	          public java.lang.String name();
 	          public void name_$eq(java.lang.String);
+		  
 	          
      3： 主构造函数中val定义的变量，会在类中定义成private final的字段，并且有对应的public getXXX方法，【例如Teacher.scala中name字段的
           定义】
-          	 class Teacher(val name: String, val age: Int, val address: String)
+          	 
+		 
+		 class Teacher(val name: String, val age: Int, val address: String)
           	 
           	  E:\program_scala_learning\chapter4>javap -private Teacher
 		  Compiled from "Teacher.scala"
@@ -95,23 +107,35 @@
 		   public Teacher(java.lang.String, int, java.lang.String);
 		  }
 		  
+		  
+		  
      4: 主构造函数中如果参数既没有被val修饰也没有被var修饰的话，Scala就会创建一个private类型的字段以及private的getXXX,setXXX,
         这样外界就无法访问了。
         
+	
+	
      5: 位于类中定义的任何表达式或者可执行语句都是主构造函数定义的一部分执行。例如下面的例子
+     
+     
      
      	class Sample{
 		println("I am creating an instance of Sample class")
 	}
+
+
 
 	new Sample
 
 	E:\program_scala_learning\chapter4>scala Sample.scala
 	I am creating an instance of Sample class
         
+	
+	
 ## 四：副构造函数和类中定义变量
  除了在主构造函数里面定义变量以外，我们还可以在类里面定义其他字段和定义方法，还可以定义一个或者多个副构造函数【this() or this(param1, param2,param3)】。
  参考下面的Person.scala类
+ 
+ 
  
 	 class Person(val firstName: String, val lastName: String) {
 		var age: Int = _
@@ -129,7 +153,11 @@
 	
 	}
 	
+	
+	
 我们对他进行编译和反编译看看内部的本质吧
+
+
 
 	E:\program_scala_learning\chapter4>javap -private Person
 	Compiled from "Person.scala"
@@ -183,6 +211,8 @@
   但是在Scala中，只能用"_"来初始化var类型的变量，无法初始化val类型的变量，因为val类型的变量无法修改的。
   
 ## 五：迎合JavaBean风格的getXXX,setXXX
+
+
    到目前为止我们看到Scala类中的getXXX,setXXX方法，跟我们比较熟悉的JavaBean风格的有很大差异；
    我们可以通过 Scala.beans.Property 注解实现具有JavaBean风格的getXXX,setXXX, 请看下面的例子：
    
