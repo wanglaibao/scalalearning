@@ -43,8 +43,8 @@ object CollectionIntrodution {
 
     val strMap = collectionIntrodution.createStringMap()
     strMap.foreach{case (key,value) => println(value)}
-
-
+    strMap.foreach{case (key: String, value: String) => println(">>> key=" + key + ", value=" + value)}
+    strMap.foreach((element:(String,String)) => println(element._1 + "=" + element._2))
   }
 
 }
