@@ -30,4 +30,16 @@ object HelloWorld {
     println(people1.getLastName)
     println(people1.getPosition)
   }
+
+  def sum(a:Int,b:Int):Int = a + b
+
+  def sum(a:Int,b:Int,c:Int):Int = a + b + c
+
+  def sum2(numbers:Int*):Int = {
+    var result = 0
+    for (number <- numbers) {
+      result += number
+    }
+    result
+  }
 }
