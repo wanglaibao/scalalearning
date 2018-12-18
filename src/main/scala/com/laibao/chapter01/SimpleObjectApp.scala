@@ -10,12 +10,22 @@ object SimpleObjectApp {
     person.watchFootBall("baba")
     println(person.address)
     person.printInfo()
+
+    val zheDaPerson = new ZheDaPerson("浙大人",120,"应用物理")
+    println(s"name is ${zheDaPerson.name} and age is ${zheDaPerson.age} and major is  ${zheDaPerson.major}")
+
   }
 }
 
 class Person ( val name:String,val age:Int){
 
+  println("Person Constructor enter")
+
+  val sex:String = "asfdsafd"
+
   var address:String = _
+
+  println("Person Constructor leave")
 
   def eat(): String = name + " is eating meal"
 
@@ -29,4 +39,17 @@ class Person ( val name:String,val age:Int){
   def printInfo(): Unit = {
     println("the person's gender is " + gender)
   }
+}
+
+class ZheDaPerson(name:String,age:Int,val major:String) extends Person(name,age) {
+
+  println("ZheDaPerson Constructor enter")
+
+  override val sex:String = "assadfasdffdsafd"
+
+  println("ZheDaPerson Constructor leave")
+
+  override def toString: String = "asfasfdasf"
+
+
 }
